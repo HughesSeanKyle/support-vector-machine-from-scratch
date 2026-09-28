@@ -55,8 +55,25 @@ def svm_objective(x, y, params, reg_lambda):
     reg_loss = reg_lambda * np.sum(params['w'] ** 2)
     return data_loss + reg_loss
 
-# Step 7 - compute_gradients (not yet solved)
-# TODO: implement
+# Step 7 - compute_gradients
+import numpy as np
+
+def compute_gradients(x, y, params, reg_lambda):
+    n_samples = x.shape[0]
+    scores = compute_scores(x, params)
+    
+    # Boolean mask checking which samples violate the margin condition threshold
+    violation_mask = (y * scores) < 1.0
+    
+    # Filter and aggregate active violations
+    dw_data = -np.dot(violation_mask * y, x) / n_samples
+    db_data = -np.sum(violation_mask * y) / n_samples
+    
+    # Adjusted to 2.0 * reg_lambda * w because the objective dropped the 0.5 factor
+    dw = dw_data + 2.0 * reg_lambda * params['w']
+    db = db_data
+    
+    return {'dw': dw, 'db': db}
 
 # Step 8 - apply_update (not yet solved)
 # TODO: implement
