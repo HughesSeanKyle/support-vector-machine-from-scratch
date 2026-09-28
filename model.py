@@ -75,8 +75,12 @@ def compute_gradients(x, y, params, reg_lambda):
     
     return {'dw': dw, 'db': db}
 
-# Step 8 - apply_update (not yet solved)
-# TODO: implement
+# Step 8 - apply_update
+def apply_update(params, grads, learning_rate):
+    updated_params = {}
+    updated_params['w'] = params['w'] - learning_rate * grads['dw']
+    updated_params['b'] = params['b'] - learning_rate * grads['db']
+    return updated_params
 
 # Step 9 - train_svm (not yet solved)
 # TODO: implement
