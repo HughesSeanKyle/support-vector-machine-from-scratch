@@ -26,8 +26,12 @@ def initialize_parameters(n_features):
         'b': 0.0
     }
 
-# Step 3 - compute_scores (not yet solved)
-# TODO: implement
+# Step 3 - compute_scores
+import numpy as np
+
+def compute_scores(x, params):
+    """Return raw linear scores x @ w + b, shape (n_samples,)."""
+    return np.dot(x, params['w']) + params['b']
 
 # Step 4 - predict_from_scores (not yet solved)
 # TODO: implement
